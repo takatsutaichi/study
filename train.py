@@ -1,4 +1,5 @@
 import os
+import tensorflow as tf
 from keras.applications.vgg16 import VGG16
 from keras.preprocessing.image import ImageDataGenerator
 from keras.models import Sequential, Model
@@ -9,7 +10,7 @@ import numpy as np
 import time
 
 # 分類するクラス
-classes = ['jenney','jisoo','Lisa','Roze']
+classes = ['blackpinkジス','blackpinkリサ','blackpinkロゼ']
 nb_classes = len(classes)
 
 img_width, img_height = 150, 150
@@ -19,8 +20,8 @@ train_data_dir = 'dataset/train'
 validation_data_dir = 'dataset/validation'
 
 # 今回はトレーニング用に200枚、バリデーション用に50枚の画像を用意した。
-nb_train_samples = 160
-nb_validation_samples = 80
+nb_train_samples = 120
+nb_validation_samples = 60
 
 batch_size = 16
 nb_epoch = 10
@@ -97,12 +98,7 @@ if __name__ == '__main__':
     train_generator, validation_generator = image_generator()
     
     # Fine-tuning
-    history = model.fit_generator(
-        train_generator,
-        samples_per_epoch=nb_train_samples,
-        nb_epoch=nb_epoch,
-        validation_data=validation_generator,
-        nb_val_samples=nb_validation_samples)
+    history = vgg_model.fit_generator(train_generator,samples_per_epoch=nb_train_samples,nb_epoch=nb_epoch,validation_data=validation_generator,nb_val_samples=nb_validation_samples)
 
     vgg_model.save_weights(os.path.join(result_dir, 'finetuning.h5'))
 

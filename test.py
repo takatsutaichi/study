@@ -6,7 +6,7 @@ from keras.layers import Input, Activation, Dropout, Flatten, Dense
 from keras.preprocessing import image
 from keras import optimizers
 
-classes = ['jenney','jisoo','Lisa','Roze']
+classes = ['blackpinkジス','blackpinkリサ','blackpinkロゼ']
 nb_classes = len(classes)
 img_width, img_height = 150, 150
 
